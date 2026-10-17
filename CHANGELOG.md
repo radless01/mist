@@ -1,9 +1,29 @@
 # Changelog
 
-Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versions follow [SemVer](https://semver.org);
-nothing is released yet.
+Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versions follow [SemVer](https://semver.org).
 
-## Unreleased
+## [0.1.1] - 2026-10-18
+
+### Fixed
+- UI translation fixes across language changes: support for uppercase template headings (e.g. `WEEK 42`), recursive sub-template translation (e.g. `2 days ago` in `Last run`), lowercase word lookups (e.g. weather conditions), and middle-dot (` · `) segment boundary isolation.
+- Missing translations added: Garmin readiness levels (*prime*, *moderate*, etc.), suggested workouts (*Rest*, *Rest day or 20–30 min walk*, etc.), previous run metrics, and weather comparison deltas.
+- UI surfaces (bars, dock, island) marked dirty and refreshed immediately on language change in desktop settings.
+
+### Security
+- IPC: 2 s read/write timeout and 64 KiB request cap so one stuck client cannot block the event loop; no `/tmp` socket fallback without `XDG_RUNTIME_DIR`.
+- Tray: `IconPixmap` size math in `usize` with icons capped at 1024×1024 px.
+- Lock screen: typed password buffer zeroed with volatile writes after PAM/greetd verification.
+- Phone backend: screenshot moved from `/tmp` to `$XDG_RUNTIME_DIR`.
+
+### Changed & Performance
+- `mist-wall`: live wallpaper pauses while monitors are off or session is locked.
+- `mist-ui`: capped memory arena allocations at 2 per process.
+- Audio: `pactl` events batched in bursts to eliminate duplicate wakeups.
+- Window title updates: fast-path state patch instead of full client parsing.
+- View count badge switched to `hits.sh`.
+- Star History chart added to READMEs.
+
+## [0.1.0] - 2026-10-16
 
 ### Added
 - Repository prepared for publishing: README in six languages, GPL-3.0 license, benchmarks

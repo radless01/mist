@@ -724,6 +724,8 @@ impl App {
                 // the language changed: app names and descriptions in the new one
                 if self.apps.lang != crate::i18n::lang() {
                     self.apps = Apps::load();
+                    self.mark_all();
+                    self.island_dirty = true;
                 }
                 self.desk.cfg = crate::desktop::Cfg::load();
                 self.desk_relayout();
