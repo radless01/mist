@@ -8,6 +8,7 @@ pkgdesc="macOS-inspired desktop shell for Hyprland, written in Rust and drawn on
 arch=('x86_64')
 url="https://github.com/wiktor-jozwiak/mist"
 license=('GPL-3.0-only')
+options=('!lto')
 depends=('hyprland' 'wayland' 'libxkbcommon' 'mesa' 'pam' 'libinput' 'seatd' 'libdrm' 'systemd-libs'
          'pipewire-pulse' 'wireplumber' 'wl-clipboard' 'grim' 'slurp' 'xdg-utils' 'xdg-user-dirs')
 makedepends=('git' 'rust' 'pkgconf')
