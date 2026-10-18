@@ -1,12 +1,12 @@
 -- Mist on Hyprland (Lua config, Hyprland >= 0.55). Load it from hyprland.lua:
---   dofile(os.getenv("HOME") .. "/.local/share/mist/shell/examples/hyprland/mist.lua")
+--   dofile(os.getenv("HOME") .. "/usr/share/mist/shell/examples/hyprland/mist.lua")
 -- or copy the parts you want. Everything goes through `mist-ui-bin msg <target> <function> [args]`.
 
 local home = os.getenv("HOME")
-local mist = home .. "/.local/bin/mist-ui-bin msg "
--- the checkout (native/install.sh links ~/.local/share/mist/shell to it), else the old fixed place
+local mist = "/usr/bin/mist-ui-bin msg "
+-- the checkout (native/install.sh links ~/usr/share/mist/shell to it), else the old fixed place
 local function exists(p) local f = io.open(p, "r"); if f then f:close() end; return f ~= nil end
-local root = home .. "/.local/share/mist/shell"
+local root =  "/usr/share/mist"
 if not exists(root .. "/scripts/shot.sh") then root = home .. "/.config/quickshell/mist" end
 local scripts = root .. "/scripts/"
 local mainMod = "SUPER"
@@ -15,7 +15,7 @@ local mainMod = "SUPER"
 -- mist-wall (wallpaper) and the mistd backends itself
 hl.on("hyprland.start", function()
     hl.exec_cmd("dbus-update-activation-environment --systemd --all")
-    hl.exec_cmd(home .. "/.local/bin/mist-ui")
+    hl.exec_cmd("/usr/bin/mist-ui")
 end)
 
 -- panels
@@ -30,7 +30,7 @@ hl.bind(mainMod .. " + period",      hl.dsp.exec_cmd(mist .. "mist toggle emoji"
 hl.bind(mainMod .. " + Y",           hl.dsp.exec_cmd(mist .. "mist toggle phone"))
 hl.bind(mainMod .. " + SHIFT + W",   hl.dsp.exec_cmd(mist .. "mist toggle wallpaper"))
 hl.bind(mainMod .. " + ALT + C",     hl.dsp.exec_cmd(mist .. "mist toggle session"))
-hl.bind(mainMod .. " + L",           hl.dsp.exec_cmd(home .. "/.local/bin/mist-ui-bin lock"))
+hl.bind(mainMod .. " + L",           hl.dsp.exec_cmd("/usr/bin/mist-ui-bin lock"))
 
 -- media and brightness (brightness over DDC/CI: ddcutil)
 hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd(mist .. "mist media toggle"), { locked = true })
